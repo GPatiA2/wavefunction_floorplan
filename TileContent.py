@@ -13,12 +13,8 @@ class TileContent(Enum):
     BOT_LEFT_CORNER  = 7
     BOT_RIGHT_CORNER = 8
 
-    LEFT_T_WALL      = 9
-    RIGHT_T_WALL     = 10
-    TOP_T_WALL       = 11
-    BOT_T_WALL       = 12
-
-    DOOR             = 13
+    DOOR             = 9
+    BARRIER          = 10
 
 class Side(Enum):
 

@@ -1,6 +1,8 @@
 from TileContent import TileContent
-from Tile import Tile
+from PyQt5.QtWidgets import *
 from random import randint
+from typing import Mapping
+import numpy as np
 
 class Cell:
 
@@ -32,12 +34,26 @@ class Cell:
 
         return valid_pos
 
-    def collapse(self) -> Tile:
+    def collapse(self) -> None:
         
         valid_idx = self.valid_possibilites()
 
         selected_content = randint(0, len(valid_idx))
 
-        self.collapsed = True
         self.possibilities = [False for c in TileContent]
         self.possibilities[valid_idx[selected_content]] = True
+
+        self.collapsed = True
+
+    def collapse_to_value(self, tc:TileContent) -> None:
+        self.possibilities = [False for c in TileContent]
+        self.possibilities[tc] = True
+        self.collapsed = True
+
+    def draw(self, img_collection) -> TileContent:
+        if self.collapsed:
+            pb = QPushButton("")
+            pb.setIcon(img_collection[self.possibilities.index(True)])
+            return pb
+        else:
+            return QPushButton("")
