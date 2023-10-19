@@ -25,6 +25,9 @@ class Cell:
     def entropy(self) -> float:
         return len(self.valid_possibilites()) 
     
+    def remove_possibility(self, tc:TileContent) -> None:
+        self.possibilities[tc] = False
+
     def valid_possibilites(self) -> list(bool):
         valid_pos = []
 
@@ -49,11 +52,3 @@ class Cell:
         self.possibilities = [False for c in TileContent]
         self.possibilities[tc] = True
         self.collapsed = True
-
-    def draw(self, img_collection) -> TileContent:
-        if self.collapsed:
-            pb = QPushButton("")
-            pb.setIcon(img_collection[self.possibilities.index(True)])
-            return pb
-        else:
-            return QPushButton("")
