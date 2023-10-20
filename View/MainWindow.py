@@ -3,8 +3,9 @@ from Controller.Controller import Controller
 from Tile import Tile
 from Model.TileContent import TileContent
 from PyQt5.QtGui import QIcon
+from Model.GridObserver import GridObserver
 
-class MainWindow(QWidget):
+class MainWindow(QWidget, GridObserver):
 
     def __init__(self, controller:Controller, width:int, height:int, contentToImg):
         super().__init__()
@@ -18,6 +19,10 @@ class MainWindow(QWidget):
         for row in self.tileGrid:
             for tile in row:
                 tile.setOnClickContent(self.onClickContent)
+
+        for tileRow in self.tileGrid:
+            for tile in tileRow:
+                self.controller.addObserver(tile.x, tile.y, tile)
 
     def initUI(self) -> None:
 
@@ -38,6 +43,9 @@ class MainWindow(QWidget):
         for row in self.tileGrid:
             for tile in row:
                 tile.setOnClickContent(self.onClickContent)
+
+    def onCollapse(self, x:int, y:int, tc:TileContent) -> None:
+        self.tileGrid[x][y].setIcon(QIcon(self.contentToImg[tc]))
 
     def generateButtonsPannel(self):
         
