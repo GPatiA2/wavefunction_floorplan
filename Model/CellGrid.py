@@ -74,7 +74,7 @@ class CellGrid:
             try:
                 cell = self.getCell(x + v[0], y + v[1])
                 if not cell.collapsed:
-                    for rule in self.adjRules:
+                    for rule in filter(lambda x : x.source == cc , self.adjRules):
                         for pos in cell.valid_possibilites():
                             if not rule.checkValid(cc, pos, k):
                                 cell.remove_possibility(pos)
