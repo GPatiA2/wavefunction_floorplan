@@ -1,5 +1,4 @@
-from TileContent import TileContent
-from Controller.Controller import Controller
+from Model.TileContent import TileContent
 
 class GridObserver:
 

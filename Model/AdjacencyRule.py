@@ -1,5 +1,5 @@
-from TileContent import TileContent
-from TileContent import Side
+from Model.TileContent import TileContent
+from Model.TileContent import Side
 
 class AdjacencyRule:
 

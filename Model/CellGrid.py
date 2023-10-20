@@ -1,10 +1,10 @@
-from Cell import Cell
-from Exceptions import OutOfBoundsException
-from TileContent import TileContent
-from GridObserver import GridObserver
+from Model.Cell import Cell
+from Model.Exceptions import OutOfBoundsException
+from Model.TileContent import TileContent
+from Model.GridObserver import GridObserver
 from typing import TypeAlias
-from AdjacencyRule import AdjacencyRule
-from TileContent import Side
+from Model.AdjacencyRule import AdjacencyRule
+from Model.TileContent import Side
 
 ObserverList : TypeAlias = list[GridObserver]
 

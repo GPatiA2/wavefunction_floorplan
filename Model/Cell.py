@@ -1,7 +1,7 @@
-from TileContent import TileContent
+from Model.TileContent import TileContent
 from PyQt5.QtWidgets import *
 from random import randint
-from GridObserver import GridObserver
+from Model.GridObserver import GridObserver
 from typing import TypeAlias
 ObserverList : TypeAlias = list[GridObserver]
 
@@ -29,7 +29,7 @@ class Cell:
     def remove_possibility(self, tc:TileContent) -> None:
         self.possibilities[tc] = False
 
-    def valid_possibilites(self) -> list(bool):
+    def valid_possibilites(self) -> list[bool]:
         valid_pos = []
 
         for i in range(len(self.possibilities)):

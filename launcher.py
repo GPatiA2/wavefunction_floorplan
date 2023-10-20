@@ -46,7 +46,8 @@ def parseAdjacencyRules(jsonRules:dict) -> list:
         dst = TileContent[rule["dst"].upper()]
         side = Side[rule["side"].upper()]
         rules.append(AdjacencyRule(src, dst, side))
-        rules.append(AdjacencyRule(dst, src, getReciprocalSide(side)))
+        if rule["reciprocal"]:
+            rules.append(AdjacencyRule(dst, src, getReciprocalSide(side)))
 
     return rules
 
@@ -84,3 +85,6 @@ def main():
     window.setCentralWidget(view)
 
     sys.exit(app.exec_())
+
+if __name__ == "__main__":
+    main()

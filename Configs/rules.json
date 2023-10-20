@@ -1,0 +1,74 @@
+[
+    {
+        "src"  : "upper_wall", 
+        "side" : "right",
+        "dst"  : "upper_wall",
+        "reciprocal" : true
+    },
+    {
+        "src"  : "top_right_corner", 
+        "side" : "left",
+        "dst"  : "upper_wall",
+        "reciprocal" : false
+    },
+    {
+        "src"  : "top_right_corner", 
+        "side" : "down",
+        "dst"  : "right_wall",
+        "reciprocal" : false
+    },
+    {
+        "src"  : "right_wall", 
+        "side" : "down",
+        "dst"  : "right_wall",
+        "reciprocal" : true
+    },
+    {
+        "src"  : "right_wall", 
+        "side" : "down",
+        "dst"  : "bottom_right_corner",
+        "reciprocal" : false
+    },
+    {
+        "src"  : "bottom_right_corner", 
+        "side" : "left",
+        "dst"  : "bottom_wall",
+        "reciprocal" : false
+    },
+    {
+        "src"  : "bottom_wall", 
+        "side" : "left",
+        "dst"  : "bottom_wall",
+        "reciprocal" : true
+    },
+    {
+        "src"  : "bottom_wall", 
+        "side" : "left",
+        "dst"  : "bottom_left_corner",
+        "reciprocal" : false
+    },
+    {
+        "src"  : "bottom_left_corner", 
+        "side" : "top",
+        "dst"  : "left_wall",
+        "reciprocal" : false
+    },
+    {
+        "src"  : "left_wall", 
+        "side" : "top",
+        "dst"  : "left_wall",
+        "reciprocal" : true
+    },
+    {
+        "src"  : "left_wall", 
+        "side" : "top",
+        "dst"  : "top_left_corner",
+        "reciprocal" : false
+    },
+    {
+        "src"  : "top_left_corner", 
+        "side" : "right",
+        "dst"  : "upper_wall",
+        "reciprocal" : false
+    }
+]

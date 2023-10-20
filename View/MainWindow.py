@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import *
 from Controller.Controller import Controller
-from Tile import Tile
+from View.Tile import Tile
 from Model.TileContent import TileContent
 from PyQt5.QtGui import QIcon
 from Model.GridObserver import GridObserver

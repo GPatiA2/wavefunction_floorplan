@@ -1,7 +1,6 @@
 from Model.TileContent import TileContent
 from Model.CellGrid import CellGrid
 from Model.GridObserver import GridObserver
-from View.MainWindow import MainWindow
 
 class Controller:
 
