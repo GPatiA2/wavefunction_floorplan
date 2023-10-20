@@ -1,8 +1,9 @@
 from TileContent import TileContent
 from PyQt5.QtWidgets import *
 from random import randint
-from typing import Mapping
-import numpy as np
+from GridObserver import GridObserver
+from typing import TypeAlias
+ObserverList : TypeAlias = list[GridObserver]
 
 class Cell:
 
