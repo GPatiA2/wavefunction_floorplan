@@ -3,23 +3,26 @@ from Exceptions import OutOfBoundsException
 from TileContent import TileContent
 from GridObserver import GridObserver
 from typing import TypeAlias
+from AdjacencyRule import AdjacencyRule
+from TileContent import Side
 
 ObserverList : TypeAlias = list[GridObserver]
 
 class CellGrid:
 
     ADJACENCY_COORDS = {
-        "UP" : (-1, 0),
-        "BOT" : (1, 0),
-        "RIGHT" : (0, 1),
-        "LEFT" : (0, -1)
+        Side.TOP : (-1, 0),
+        Side.RIGHT : (0, 1),
+        Side.BOT : (1, 0),
+        Side.LEFT : (0, -1)
     }
 
-    def __init__(self, width:int, height:int):
+    def __init__(self, width:int, height:int, adjRules:list[AdjacencyRule]):
         self.width = width
         self.height = height
         self.grid = [[Cell(x, y) for y in range(width)] for x in range(height)]
         self.notCollapsed = width * height
+        self.adjRules = adjRules
         self.observers : ObserverList = []
 
     def addObserver(self, go:GridObserver) -> None:
@@ -47,7 +50,7 @@ class CellGrid:
             for go in self.observers:
                 go.onCollapse(minEntropyCellCoords[0], minEntropyCellCoords[1], minEntropyCell.valid_possibilites()[0])
 
-            self.propagatePerturbation(minEntropyCellCoords[0], minEntropyCellCoords[1])
+            self.propagatePerturbation(minEntropyCellCoords[0], minEntropyCellCoords[1], minEntropyCell.valid_possibilites[0])
             self.notCollapsed -= 1
 
     def getMinEntropyCellCoords(self) -> tuple[int]:
@@ -65,13 +68,16 @@ class CellGrid:
 
         return minEntropyCellCoords
     
-    def propagatePerturbation(self, x:int, y:int) -> None:
+    def propagatePerturbation(self, x:int, y:int, cc:TileContent) -> None:
 
         for k, v in self.ADJACENCY_COORDS.items():
             try:
                 cell = self.getCell(x + v[0], y + v[1])
                 if not cell.collapsed:
-                    cell.remove_possibility(TileContent[k])
+                    for rule in self.adjRules:
+                        for pos in cell.valid_possibilites():
+                            if not rule.checkValid(cc, pos, k):
+                                cell.remove_possibility(pos)
             except OutOfBoundsException:
                 pass
 

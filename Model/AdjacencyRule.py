@@ -1,6 +1,5 @@
 from TileContent import TileContent
 from TileContent import Side
-from Cell import Cell
 
 class AdjacencyRule:
 
@@ -10,10 +9,10 @@ class AdjacencyRule:
         self.dest   = dest
         self.side   = side
 
-    def checkValid(self, source:Cell, dest:Cell, side:Side) -> bool:
+    def checkValid(self, source:TileContent, dest:TileContent, side:Side) -> bool:
 
-        source_content = self.source == source.get_content()
-        dest_content   = self.dest   == dest.get_content()
+        source_content = self.source == source
+        dest_content   = self.dest   == dest
         side_match     = self.side == side
 
         return source_content and dest_content and side_match
