@@ -13,7 +13,7 @@
     },
     {
         "src"  : "top_right_corner", 
-        "side" : "down",
+        "side" : "bot",
         "dst"  : "right_wall",
         "reciprocal" : false
     },
@@ -26,11 +26,11 @@
     {
         "src"  : "right_wall", 
         "side" : "bot",
-        "dst"  : "bottom_right_corner",
+        "dst"  : "bot_right_corner",
         "reciprocal" : false
     },
     {
-        "src"  : "bottom_right_corner", 
+        "src"  : "bot_right_corner", 
         "side" : "left",
         "dst"  : "bottom_wall",
         "reciprocal" : false
@@ -44,11 +44,11 @@
     {
         "src"  : "bottom_wall", 
         "side" : "left",
-        "dst"  : "bottom_left_corner",
+        "dst"  : "bot_left_corner",
         "reciprocal" : false
     },
     {
-        "src"  : "bottom_left_corner", 
+        "src"  : "bot_left_corner", 
         "side" : "top",
         "dst"  : "left_wall",
         "reciprocal" : false

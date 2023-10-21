@@ -10,24 +10,20 @@ class MainWindow(QWidget, GridObserver):
     def __init__(self, controller:Controller, width:int, height:int, contentToImg):
         super().__init__()
         self.controller = controller
-        self.initUI()
-        self.width = width
-        self.height = height
+        self.width_c = width 
+        self.height_c = height
         self.contentToImg = contentToImg
+        self.initUI()
 
         self.onClickContent = self.contentToImg[TileContent.EMPTY]
         for row in self.tileGrid:
             for tile in row:
                 tile.setOnClickContent(self.onClickContent)
 
-        for tileRow in self.tileGrid:
-            for tile in tileRow:
-                self.controller.addObserver(tile.x, tile.y, tile)
-
     def initUI(self) -> None:
 
         self.setWindowTitle("Automatic floor planner")
-        self.tileGrid = [[Tile(self.controller, x, y) for x in range(self.width)] for y in range(self.height)]
+        self.tileGrid = [[Tile(self.controller, x, y) for x in range(self.width_c)] for y in range(self.height_c)]
 
         gridPannel = self.generateGridPannel()
         buttonsPannel = self.generateButtonsPannel()
@@ -100,10 +96,10 @@ class MainWindow(QWidget, GridObserver):
         botLeftCornerButton.setIcon(QIcon(self.contentToImg[TileContent.BOT_LEFT_CORNER]))  
         buttons.append(botLeftCornerButton)
 
-        doorButton = QPushButton("")
-        doorButton.clicked.connect(lambda: self.changeOnClickContent(TileContent.DOOR))
-        doorButton.setIcon(QIcon(self.contentToImg[TileContent.DOOR]))
-        buttons.append(doorButton)
+        # doorButton = QPushButton("")
+        # doorButton.clicked.connect(lambda: self.changeOnClickContent(TileContent.DOOR))
+        # doorButton.setIcon(QIcon(self.contentToImg[TileContent.DOOR]))
+        # buttons.append(doorButton)
 
         barrierButton = QPushButton("")
         barrierButton.clicked.connect(lambda: self.changeOnClickContent(TileContent.BARRIER))
@@ -121,8 +117,8 @@ class MainWindow(QWidget, GridObserver):
     def generateGridPannel(self):
         
         layout = QGridLayout()
-        for i in range(self.height):
-            for j in range(self.width):
+        for i in range(self.height_c):
+            for j in range(self.width_c):
                 layout.addWidget(self.tileGrid[i][j], i, j)
         
         gridPannel = QWidget()

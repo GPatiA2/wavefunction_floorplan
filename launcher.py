@@ -20,7 +20,7 @@ def options():
 
     parser = argparse.ArgumentParser(description="Automatic floor planner")
     parser.add_argument("-w", "--width", type=int, default=10, help="Width of the grid")
-    parser.add_argument("-h", "--height", type=int, default=10, help="Height of the grid")
+    parser.add_argument("-t", "--height", type=int, default=10, help="Height of the grid")
     parser.add_argument("-r", "--rules_file", type=str, help="File containing adjacency rules")
     parser.add_argument("-i", "--icons_file", type=str, help="File containing icons paths")
     opt = parser.parse_args()
@@ -83,6 +83,8 @@ def main():
 
     window = QMainWindow()
     window.setCentralWidget(view)
+
+    window.show()
 
     sys.exit(app.exec_())
 

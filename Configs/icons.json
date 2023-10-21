@@ -12,7 +12,7 @@
         "path"    : "Resources/upper_wall.png"
     },
     {
-        "content" : "lower_wall",
+        "content" : "bottom_wall",
         "path"    : "Resources/lower_wall.png"
     },
     {
@@ -24,19 +24,19 @@
         "path"    : "Resources/right_wall.png"
     },
     {
-        "content" : "upper_left_corner",
-        "path"    : "Resources/upper_left_corner.png"
+        "content" : "top_left_corner",
+        "path"    : "Resources/top_left_corner.png"
     },
     {
-        "content" : "upper_right_corner",
-        "path"    : "Resources/upper_right_corner.png"
+        "content" : "top_right_corner",
+        "path"    : "Resources/top_right_corner.png"
     },
     {
-        "content" : "lower_left_corner",
+        "content" : "bot_left_corner",
         "path"    : "Resources/lower_left_corner.png"
     },
     {
-        "content" : "lower_right_corner",
+        "content" : "bot_right_corner",
         "path"    : "Resources/lower_right_corner.png"
     }
 ]
