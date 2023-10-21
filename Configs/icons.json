@@ -1,0 +1,42 @@
+[
+    {
+        "content" : "empty",
+        "path"    : "Resources/empty.png"
+    },
+    {
+        "content" : "barrier",
+        "path"    : "Resources/barrier.png"
+    },
+    {
+        "content" : "upper_wall",
+        "path"    : "Resources/upper_wall.png"
+    },
+    {
+        "content" : "lower_wall",
+        "path"    : "Resources/lower_wall.png"
+    },
+    {
+        "content" : "left_wall",
+        "path"    : "Resources/left_wall.png"
+    },
+    {
+        "content" : "right_wall",
+        "path"    : "Resources/right_wall.png"
+    },
+    {
+        "content" : "upper_left_corner",
+        "path"    : "Resources/upper_left_corner.png"
+    },
+    {
+        "content" : "upper_right_corner",
+        "path"    : "Resources/upper_right_corner.png"
+    },
+    {
+        "content" : "lower_left_corner",
+        "path"    : "Resources/lower_left_corner.png"
+    },
+    {
+        "content" : "lower_right_corner",
+        "path"    : "Resources/lower_right_corner.png"
+    }
+]
