@@ -42,7 +42,9 @@ class Cell:
         
         valid_idx = self.valid_possibilites()
 
-        selected_content = randint(0, len(valid_idx))
+        selected_content = randint(0, len(valid_idx) - 1) if len(valid_idx) > 1 else 0
+
+        print("Chosen to collapse cell ", self.x, " ", self.y, " to index ", selected_content, " with value ", TileContent(valid_idx[selected_content])
 
         self.possibilities = [False for c in TileContent]
         self.possibilities[valid_idx[selected_content]] = True
@@ -51,5 +53,5 @@ class Cell:
 
     def collapse_to_value(self, tc:TileContent) -> None:
         self.possibilities = [False for c in TileContent]
-        self.possibilities[tc] = True
+        self.possibilities[int(tc)] = True
         self.collapsed = True

@@ -9,11 +9,11 @@
     },
     {
         "content" : "upper_wall",
-        "path"    : "Resources/upper_wall.png"
+        "path"    : "Resources/top_wall.png"
     },
     {
         "content" : "bottom_wall",
-        "path"    : "Resources/lower_wall.png"
+        "path"    : "Resources/bottom_wall.png"
     },
     {
         "content" : "left_wall",
@@ -33,10 +33,10 @@
     },
     {
         "content" : "bot_left_corner",
-        "path"    : "Resources/lower_left_corner.png"
+        "path"    : "Resources/bottom_left_corner.png"
     },
     {
         "content" : "bot_right_corner",
-        "path"    : "Resources/lower_right_corner.png"
+        "path"    : "Resources/bottom_right_corner.png"
     }
 ]

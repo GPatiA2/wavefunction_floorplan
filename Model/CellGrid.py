@@ -35,6 +35,8 @@ class CellGrid:
             raise OutOfBoundsException("CellGrid::getCell() - Cell coordinates out of bounds")
         
     def collapseCell(self, x:int, y:int, tc:TileContent) -> None:
+        print(tc)
+        print("MODEL GOT CELL ", x," ", y)
         self.grid[x][y].collapse_to_value(tc)
         for go in self.observers:
             go.onCollapse(x, y, tc)
@@ -50,7 +52,7 @@ class CellGrid:
             for go in self.observers:
                 go.onCollapse(minEntropyCellCoords[0], minEntropyCellCoords[1], minEntropyCell.valid_possibilites()[0])
 
-            self.propagatePerturbation(minEntropyCellCoords[0], minEntropyCellCoords[1], minEntropyCell.valid_possibilites[0])
+            self.propagatePerturbation(minEntropyCellCoords[0], minEntropyCellCoords[1], minEntropyCell.valid_possibilites()[0])
             self.notCollapsed -= 1
 
     def getMinEntropyCellCoords(self) -> tuple[int]:

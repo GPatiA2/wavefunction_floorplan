@@ -1,6 +1,6 @@
-from enum import Enum
+from enum import Enum, IntEnum
 
-class TileContent(Enum):
+class TileContent(IntEnum):
     EMPTY            = 0
     
     UPPER_WALL       = 1
@@ -16,7 +16,7 @@ class TileContent(Enum):
     DOOR             = 9
     BARRIER          = 10
 
-class Side(Enum):
+class Side(IntEnum):
 
     TOP   = 0
     RIGHT = 1

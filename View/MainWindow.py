@@ -16,14 +16,16 @@ class MainWindow(QWidget, GridObserver):
         self.initUI()
 
         self.onClickContent = self.contentToImg[TileContent.EMPTY]
+        self.collapsingTo = TileContent.EMPTY
         for row in self.tileGrid:
             for tile in row:
-                tile.setOnClickContent(self.onClickContent)
+                tile.setOnClickContent(self.onClickContent, self.collapsingTo)
 
     def initUI(self) -> None:
 
         self.setWindowTitle("Automatic floor planner")
-        self.tileGrid = [[Tile(self.controller, x, y) for x in range(self.width_c)] for y in range(self.height_c)]
+    
+        self.tileGrid = [[Tile(self.controller, y, x) for x in range(self.width_c)] for y in range(self.height_c)]
 
         gridPannel = self.generateGridPannel()
         buttonsPannel = self.generateButtonsPannel()
@@ -38,10 +40,11 @@ class MainWindow(QWidget, GridObserver):
         self.onClickContent = self.contentToImg[tc]
         for row in self.tileGrid:
             for tile in row:
-                tile.setOnClickContent(self.onClickContent)
+                tile.setOnClickContent(self.onClickContent, tc)
 
     def onCollapse(self, x:int, y:int, tc:TileContent) -> None:
-        self.tileGrid[x][y].setIcon(QIcon(self.contentToImg[tc]))
+        k = TileContent(tc)
+        self.tileGrid[x][y].setIcon(QIcon(self.contentToImg[k]))
 
     def generateButtonsPannel(self):
         
@@ -50,6 +53,7 @@ class MainWindow(QWidget, GridObserver):
 
         runButton = QPushButton("Run")
         runButton.clicked.connect(self.controller.runAlgorithm)
+        buttons.append(runButton)
 
         emptyButton = QPushButton("")
         emptyButton.clicked.connect(lambda: self.changeOnClickContent(TileContent.EMPTY))

@@ -74,6 +74,9 @@ def main():
     adjrules = parseAdjacencyRules(rules)
     contentToImg = parseFileIcons(icons)
 
+    for it in contentToImg.items():
+        print(it)
+
     app = QApplication([])
 
     model = CellGrid(args.width, args.height, adjrules)
