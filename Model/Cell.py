@@ -24,10 +24,15 @@ class Cell:
             self.possibilities[pos] = False
 
     def entropy(self) -> float:
-        return len(self.valid_possibilites()) 
+        ent = len(self.valid_possibilites()) 
+        return ent
     
     def remove_possibility(self, tc:TileContent) -> None:
         self.possibilities[tc] = False
+
+    def update_possibilities(self, pos : list[TileContent]):
+        for idx in range(len(pos)):
+            self.possibilities[idx] = self.possibilities[idx] and pos[idx]
 
     def valid_possibilites(self) -> list[bool]:
         valid_pos = []
@@ -42,9 +47,17 @@ class Cell:
         
         valid_idx = self.valid_possibilites()
 
+        print(" POSSIBILITIES ")
+        for i in self.possibilities:
+            print("     ",i)
+
+        print(" VALID POSS")
+        for i in valid_idx:
+            print("     ",i)
+
         selected_content = randint(0, len(valid_idx) - 1) if len(valid_idx) > 1 else 0
 
-        print("Chosen to collapse cell ", self.x, " ", self.y, " to index ", selected_content, " with value ", TileContent(valid_idx[selected_content])
+        print("CHOSEN CONTENT ", TileContent(selected_content).name)
 
         self.possibilities = [False for c in TileContent]
         self.possibilities[valid_idx[selected_content]] = True

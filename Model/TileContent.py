@@ -13,8 +13,9 @@ class TileContent(IntEnum):
     BOT_LEFT_CORNER  = 7
     BOT_RIGHT_CORNER = 8
 
-    DOOR             = 9
-    BARRIER          = 10
+    #DOOR             = 9
+    BARRIER          = 9
+
 
 class Side(IntEnum):
 

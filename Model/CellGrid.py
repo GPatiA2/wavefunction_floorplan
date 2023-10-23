@@ -35,9 +35,8 @@ class CellGrid:
             raise OutOfBoundsException("CellGrid::getCell() - Cell coordinates out of bounds")
         
     def collapseCell(self, x:int, y:int, tc:TileContent) -> None:
-        print(tc)
-        print("MODEL GOT CELL ", x," ", y)
         self.grid[x][y].collapse_to_value(tc)
+        self.propagatePerturbation(x,y,tc)
         for go in self.observers:
             go.onCollapse(x, y, tc)
         self.notCollapsed -= 1
@@ -45,8 +44,12 @@ class CellGrid:
     def runAlgorithm(self) -> None:
         
         while self.notCollapsed > 0:
+            print("========================ITERATION========================================")
+
             minEntropyCellCoords = self.getMinEntropyCellCoords()
+            print("MIN ENTROPY CELL = ", minEntropyCellCoords[0],",",minEntropyCellCoords[1])
             minEntropyCell = self.getCell(minEntropyCellCoords[0], minEntropyCellCoords[1])
+            print("COLLAPSING")
             minEntropyCell.collapse()
             
             for go in self.observers:
@@ -71,15 +74,20 @@ class CellGrid:
         return minEntropyCellCoords
     
     def propagatePerturbation(self, x:int, y:int, cc:TileContent) -> None:
-
+        print("CELL ", x, ",", y)
         for k, v in self.ADJACENCY_COORDS.items():
             try:
                 cell = self.getCell(x + v[0], y + v[1])
-                if not cell.collapsed:
-                    for rule in filter(lambda x : x.source == cc , self.adjRules):
-                        for pos in cell.valid_possibilites():
-                            if not rule.checkValid(cc, pos, k):
-                                cell.remove_possibility(pos)
+                print("PROPAGATING TO ", x+v[0], ",", y+v[1])
+                possibilities = [False for it in TileContent]
+                
+                appliable_rules = list(filter(lambda r: r.source == cc and r.side == k, self.adjRules))
+                print("THERE ARE ", len(appliable_rules), " RULES TO APPLY")
+                for r in appliable_rules:
+                    possibilities[r.dest] = True
+
+                cell.update_possibilities(possibilities)
+
             except OutOfBoundsException:
                 pass
 

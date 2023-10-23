@@ -66,7 +66,7 @@ class MainWindow(QWidget, GridObserver):
         buttons.append(upperWallButton)
 
         lowerWallButton = QPushButton("")
-        lowerWallButton.clicked.connect(lambda: self.changeOnClickContent(TileContent.LOWER_WALL))
+        lowerWallButton.clicked.connect(lambda: self.changeOnClickContent(TileContent.BOTTOM_WALL))
         lowerWallButton.setIcon(QIcon(self.contentToImg[TileContent.BOTTOM_WALL]))
         buttons.append(lowerWallButton)
 
