@@ -72,6 +72,54 @@
         "reciprocal" : false
     },
     {
+        "src"  : "top_left_corner",
+        "side" : "top",
+        "dst"  : "empty",
+        "reciprocal" : true
+    },
+    {
+        "src"  : "top_left_corner",
+        "side" : "left",
+        "dst"  : "empty",
+        "reciprocal" : true
+    },
+    {
+        "src"  : "bot_left_corner",
+        "side" : "left",
+        "dst"  : "empty",
+        "reciprocal" : true
+    },
+    {
+        "src"  : "bot_left_corner",
+        "side" : "bot",
+        "dst"  : "empty",
+        "reciprocal" : true
+    },
+    {
+        "src"  : "bot_right_corner",
+        "side" : "right",
+        "dst"  : "empty",
+        "reciprocal" : true
+    },
+    {
+        "src"  : "bot_right_corner",
+        "side" : "bot",
+        "dst"  : "empty",
+        "reciprocal" : true
+    },
+    {
+        "src"  : "top_right_corner",
+        "side" : "top",
+        "dst"  : "empty",
+        "reciprocal" : true
+    },
+    {
+        "src"  : "top_right_corner",
+        "side" : "right",
+        "dst"  : "empty",
+        "reciprocal" : true
+    },
+    {
         "src"  : "upper_wall", 
         "side" : "bot",
         "dst"  : "empty",
@@ -91,6 +139,18 @@
     },
     {
         "src"  : "right_wall", 
+        "side" : "left",
+        "dst"  : "empty",
+        "reciprocal" : true
+    },
+    {
+        "src"  : "empty", 
+        "side" : "top",
+        "dst"  : "empty",
+        "reciprocal" : true
+    },
+    {
+        "src"  : "empty", 
         "side" : "left",
         "dst"  : "empty",
         "reciprocal" : true

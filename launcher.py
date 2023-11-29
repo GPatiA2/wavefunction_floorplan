@@ -16,6 +16,8 @@ import sys
 
 import json
 
+# launcher.py -w 15 -t 15 -r Configs/rules.json -i Configs/icons.json
+
 def options():
 
     parser = argparse.ArgumentParser(description="Automatic floor planner")
@@ -72,6 +74,9 @@ def main():
         icons = json.load(f)
 
     adjrules = parseAdjacencyRules(rules)
+    for r in adjrules:
+        print(TileContent(r.source).name, " ", Side(r.side).name, " ", TileContent(r.dest).name)
+
     contentToImg = parseFileIcons(icons)
 
     for it in contentToImg.items():

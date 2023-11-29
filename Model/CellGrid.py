@@ -43,20 +43,35 @@ class CellGrid:
 
     def runAlgorithm(self) -> None:
         
-        while self.notCollapsed > 0:
-            print("========================ITERATION========================================")
+        try:
+            while self.notCollapsed > 0:
+                print("========================ITERATION========================================")
 
-            minEntropyCellCoords = self.getMinEntropyCellCoords()
-            print("MIN ENTROPY CELL = ", minEntropyCellCoords[0],",",minEntropyCellCoords[1])
-            minEntropyCell = self.getCell(minEntropyCellCoords[0], minEntropyCellCoords[1])
-            print("COLLAPSING")
-            minEntropyCell.collapse()
-            
-            for go in self.observers:
-                go.onCollapse(minEntropyCellCoords[0], minEntropyCellCoords[1], minEntropyCell.valid_possibilites()[0])
+                minEntropyCellCoords = self.getMinEntropyCellCoords()
 
-            self.propagatePerturbation(minEntropyCellCoords[0], minEntropyCellCoords[1], minEntropyCell.valid_possibilites()[0])
-            self.notCollapsed -= 1
+                minEntropyCell = self.getCell(minEntropyCellCoords[0], minEntropyCellCoords[1])
+                print("COLLAPSING = ", minEntropyCellCoords[0], " ", minEntropyCellCoords[1])
+                minEntropyCell.collapse()
+                
+                for go in self.observers:
+                    go.onCollapse(minEntropyCellCoords[0], minEntropyCellCoords[1], minEntropyCell.valid_possibilites()[0])
+
+                self.propagatePerturbation(minEntropyCellCoords[0], minEntropyCellCoords[1], minEntropyCell.valid_possibilites()[0])
+                self.notCollapsed -= 1
+
+        except Exception as e :
+            print(e)
+
+    def getReciprocalSide(self, side:Side) -> Side:
+
+        if side == Side.TOP:
+            return Side.BOT
+        elif side == Side.BOT:
+            return Side.TOP
+        elif side == Side.LEFT:
+            return Side.RIGHT
+        elif side == Side.RIGHT:
+            return Side.LEFT
 
     def getMinEntropyCellCoords(self) -> tuple[int]:
 
@@ -74,19 +89,39 @@ class CellGrid:
         return minEntropyCellCoords
     
     def propagatePerturbation(self, x:int, y:int, cc:TileContent) -> None:
-        print("CELL ", x, ",", y)
+
         for k, v in self.ADJACENCY_COORDS.items():
             try:
                 cell = self.getCell(x + v[0], y + v[1])
-                print("PROPAGATING TO ", x+v[0], ",", y+v[1])
-                possibilities = [False for it in TileContent]
-                
-                appliable_rules = list(filter(lambda r: r.source == cc and r.side == k, self.adjRules))
-                print("THERE ARE ", len(appliable_rules), " RULES TO APPLY")
-                for r in appliable_rules:
-                    possibilities[r.dest] = True
+                if not cell.collapsed:
+                    print("CELL ", x+v[0], ",", y+v[1])
+                    possibilities = [False for it in TileContent]
+                    
+                    appliable_rules = list(filter(lambda r: r.source == cc and r.side == k, self.adjRules))
+                    recip_rules     = list(filter(lambda r: r.dest == cc and r.side == self.getReciprocalSide(k), self.adjRules))
 
-                cell.update_possibilities(possibilities)
+                    ap_rules = []
+                    
+                    for r in appliable_rules:
+                        ap_rules.append("" + TileContent(r.source).name + " " + Side(r.side).name + " " + TileContent(r.dest).name)
+
+                    for r in recip_rules:
+                        ap_rules.append("" + TileContent(r.source).name + " " + Side(r.side).name + " " + TileContent(r.dest).name)
+
+                    print(" APPLYING RULES ", ap_rules)
+
+                    for r in appliable_rules:
+                        possibilities[r.dest] = True
+
+                    for r in recip_rules:
+                        possibilities[r.source] = True
+                    
+                    if possibilities.count(True) != 0:
+                        cell.update_possibilities(possibilities)
+                    else:
+                        possibilities[TileContent(0)] = True
+                        possibilities[TileContent(9)] = True
+                        cell.update_possibilities(possibilities)
 
             except OutOfBoundsException:
                 pass

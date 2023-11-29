@@ -15,24 +15,37 @@ class Cell:
         self.allowed_count = len(self.possibilities)
         self.collapsed = False
 
-    def update(self, pos:TileContent) -> None:
-        if self.collapsed:
-            return
-        else:
-            if self.possibilities[pos]:
-                self.allowed_count -= 1
-            self.possibilities[pos] = False
-
     def entropy(self) -> float:
         ent = len(self.valid_possibilites()) 
         return ent
-    
-    def remove_possibility(self, tc:TileContent) -> None:
-        self.possibilities[tc] = False
 
     def update_possibilities(self, pos : list[TileContent]):
+
+
+        
+        act_pos = []
+        for i in range(len(self.possibilities)):
+            if self.possibilities[i]:
+                act_pos.append(TileContent(i).name)
+
+        print(" ACTUAL POSSIBILITIES = ", act_pos)
+
+        updating = []
+        for i in range(len(pos)):
+            if pos[i]:
+                updating.append(TileContent(i).name)
+
+        print(" UPDATING WITH = ", updating)
+
         for idx in range(len(pos)):
             self.possibilities[idx] = self.possibilities[idx] and pos[idx]
+
+        act_pos = []
+        for i in range(len(self.possibilities)):
+            if self.possibilities[i]:
+                act_pos.append(TileContent(i).name)
+
+        print(" NEW ACTUAL POSSIBILITIES = ", act_pos)
 
     def valid_possibilites(self) -> list[bool]:
         valid_pos = []
@@ -47,17 +60,7 @@ class Cell:
         
         valid_idx = self.valid_possibilites()
 
-        print(" POSSIBILITIES ")
-        for i in self.possibilities:
-            print("     ",i)
-
-        print(" VALID POSS")
-        for i in valid_idx:
-            print("     ",i)
-
         selected_content = randint(0, len(valid_idx) - 1) if len(valid_idx) > 1 else 0
-
-        print("CHOSEN CONTENT ", TileContent(selected_content).name)
 
         self.possibilities = [False for c in TileContent]
         self.possibilities[valid_idx[selected_content]] = True
